@@ -54,4 +54,5 @@ jobs:
         
       # Push image
       - name: Push Docker image
+        if: github.event_name != 'pull_request'
         run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/sshd
