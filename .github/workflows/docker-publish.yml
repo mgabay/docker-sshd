@@ -1,4 +1,4 @@
-name: Docker
+name: Docker image CI
 
 on:
   schedule:
@@ -51,3 +51,7 @@ jobs:
       # Build Docker image
       - name: Build Docker image
         run: cd build && ./build.sh
+        
+      # Push image
+      - name: Push Docker image
+        run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/sshd
