@@ -1,0 +1,18 @@
+version: '3'
+
+# Create a single docker container for xpress and mount license file
+# For testing purposes
+services:
+  sshd:
+    hostname: oraclelinux-ssh
+    image: "$SSH_IMG"
+    tty: true
+    labels:
+      NAME: "Simple SSH server over docker"
+    ports:
+      - "$SSH_PORT:22"
+
+    # Mount authorized_keys file
+    volumes:
+      - ./authorized_keys:/home/$SSH_USER/.ssh/authorized_keys
+
