@@ -10,8 +10,10 @@ RUN microdnf update -y && \
 # - Generate host keys
 # - Disable PAM for security purposes
 RUN ssh-keygen -A && \
-    sed -i 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config && \
-    sed -i 's/#UsePAM no/UsePAM no/g' /etc/ssh/sshd_config
+    sed -i 's/^#\{0,1\}UsePAM\s*.*/UsePAM no/g' /etc/ssh/sshd_config && \
+    sed -i 's/^#\{0,1\}PermitRootLogin\s*.*/PermitRootLogin no/g' /etc/ssh/sshd_config && \
+    sed -i 's/^#\{0,1\}PermitEmptyPasswords\s*.*/PermitEmptyPasswords no/g' /etc/ssh/sshd_config && \
+    sed -i 's/^#\{0,1\}PasswordAuthentication\s*.*/PasswordAuthentication no/g' /etc/ssh/sshd_config
 
 ARG SSH_GID
 ARG SSH_GROUP
